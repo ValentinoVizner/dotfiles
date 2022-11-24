@@ -1,0 +1,160 @@
+format = """
+[←](#9A348E)\
+$username\
+[→](bg:#DA627D fg:#9A348E)\
+$directory\
+[→](fg:#DA627D bg:#FCA17D)\
+$git_branch\
+$git_status\
+[→](fg:#FCA17D bg:#86BBD8)\
+$c\
+$golang\
+$java\
+$rust\
+$python\
+$helm\
+$kubernetes\
+[→](fg:#86BBD8 bg:#06969A)\
+$docker_context\
+[→](fg:#06969A bg:#33658A)\
+$time\
+[❯ ](fg:#33658A)\
+"""
+
+add_newline = true
+
+[aws]
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = "bold blue"
+[aws.region_aliases]
+eu-central-1 = "euc-1"
+eu-west-1 = "euw-1"
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+[character]
+error_symbol = "[✖](bold red) "
+
+[cmd_duration]
+min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
+format = " took [$duration]($style)"
+
+[directory]
+style = "bg:#DA627D"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "📄 "
+"Downloads" = "📥 "
+"Music" = "🎜 "
+"Pictures" = "📷 "
+
+[docker_context]
+symbol = "🐳 "
+style = "bg:#06969A"
+format = '[[ $symbol $context ](bg:#06969A)]($style) $path'
+
+
+[git_branch]
+format = " [$symbol$branch]($style) "
+symbol = "🍣 "
+style = "bold yellow"
+
+[git_commit]
+# disabled = true
+style = "bg:#E58F73 fg:#111111"
+commit_hash_length = 4
+# only_detached = true
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+[git_status]
+conflicted = "⚔️ "
+ahead = "🏎️ 💨 ×${count}"
+behind = "🐢 ×${count}"
+diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count}"
+untracked = "🛤️  ×${count}"
+stashed = "📦 "
+modified = "📝 ×${count}"
+staged = "🗃️  ×${count}"
+renamed = "📛 ×${count}"
+deleted = "🗑️  ×${count}"
+style = "bright-white"
+format = "$all_status$ahead_behind"
+
+[hostname]
+ssh_only = false
+format = "<[$hostname]($style)>"
+trim_at = "-"
+style = "bold dimmed white"
+# disabled = true
+
+[helm]
+# disabled = true
+symbol = "⎈"
+style = "bg:#0F1689 fg:#EEEEEE"
+format = "[[ ](bg:#464347 fg:#0F1689)$symbol$version[](bg:#464347 fg:#0F1689)]($style)"
+
+
+[kubernetes]
+disabled = false
+format = 'on [☸︎ in $context \($namespace\)](dimmed blue) '
+[kubernetes.context_aliases]
+"*dev.incubator*" = "dev-incubator"
+"*qa.incubator*" = "qa-incubator"
+"*stage.incubator*" = "stage-incubator"
+"*production.incubator*" = "prod-incubator"
+
+[julia]
+format = "[$symbol$version]($style) "
+symbol = "ஃ "
+style = "bold green"
+
+[memory_usage]
+format = "$symbol[${ram}( | ${swap})]($style) "
+threshold = 70
+style = "bold dimmed white"
+disabled = false
+
+[package]
+disabled = true
+
+[python]
+symbol = "🐍"
+pyenv_version_name = true
+#format = 'via [${symbol}python (${version} )(\($virtualenv\) )]($style)'
+style = "bold yellow"
+python_binary = ["./venv/bin/python", "python", "python3", "python2"]
+detect_extensions = ["py"]
+version_format = "v${raw}"
+format = '[[ ](bg:#464347 fg:#EBD45B)$symbol$pyenv_prefix$version(\($virtualenv\))[](bg:#464347 fg:#EBD45B)]($style)'
+
+[rust]
+# disabled = true
+# symbol = " " # alternate
+style = "bg:#A72145 fg:#EEEEEE"
+format = "[[ ](bg:#464347 fg:#A72145)$symbol$version[](bg:#464347 fg:#A72145)]($style)"
+symbol = "🦀"
+
+[time]
+time_format = "%T"
+format = "🕙 $time($style) "
+style = "bright-white"
+disabled = false
+
+[username]
+style_user = "bold dimmed blue"
+show_always = false
+
+[nodejs]
+format = "via [🤖 $version](bold green) "
